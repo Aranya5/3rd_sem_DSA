@@ -1,8 +1,9 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #define MAX_TERM 100
 
-typedef struct {
+typedef struct
+{
     int cof;
     int exp;
 } term;
@@ -12,19 +13,19 @@ void inputPolynomial(term poly[], int *numberTerms)
     int i;
     printf("Enter number of terms in the polynomial:");
     scanf("%d", numberTerms);
-    for (i=0;i<*numberTerms;i++)
+    for (i = 0; i < *numberTerms; i++)
     {
-        printf("Enter the %d term's cofficient and exponent", i+1);
-        scanf("%d %d",&poly[i].cof, &poly[i].exp);
+        printf("Enter the %d term's cofficient and exponent", i + 1);
+        scanf("%d %d", &poly[i].cof, &poly[i].exp);
     }
 }
 
 int addPolynomial(term poly1[], int numT1, term poly2[], int numT2, term result[])
 {
-    int i=0,j=0,k=0;
-    while(i<numT1 && j<numT2)
+    int i = 0, j = 0, k = 0;
+    while (i < numT1 && j < numT2)
     {
-        if(poly1[i].exp == poly2[j].exp)
+        if (poly1[i].exp == poly2[j].exp)
         {
             result[k].cof = poly1[i].cof + poly2[j].cof;
             result[k].exp = poly1[i].exp;
@@ -32,7 +33,7 @@ int addPolynomial(term poly1[], int numT1, term poly2[], int numT2, term result[
             j++;
         }
 
-        else if(poly1[i].exp > poly2[j].exp)
+        else if (poly1[i].exp > poly2[j].exp)
         {
             result[k] = poly1[i];
             i++;
@@ -45,16 +46,16 @@ int addPolynomial(term poly1[], int numT1, term poly2[], int numT2, term result[
         k++;
     }
 
-    while(i< numT1)
+    while (i < numT1)
     {
-        result[k]= poly1[i];
+        result[k] = poly1[i];
         i++;
         k++;
     }
 
-     while(j< numT2)
+    while (j < numT2)
     {
-        result[k]= poly1[j];
+        result[k] = poly1[j];
         j++;
         k++;
     }
@@ -66,15 +67,15 @@ void displayPolynomial(term poly[], int numT)
 {
     int i;
     printf("The sum of the polynomials is:\n");
-    for(i=0;i<numT;i++)
+    for (i = 0; i < numT; i++)
     {
-        printf("%dX^%d", poly[i].cof,poly[i].exp);
-        if(poly[i+1].cof > 0 && i<numT-1)
+        printf("%dX^%d", poly[i].cof, poly[i].exp);
+        if (poly[i + 1].cof > 0 && i < numT - 1)
         {
             printf(" + ");
         }
         else
-         printf(" ");
+            printf(" ");
     }
     printf("\n");
 }
@@ -82,7 +83,7 @@ void displayPolynomial(term poly[], int numT)
 int main()
 {
     term poly1[MAX_TERM], poly2[MAX_TERM], result[MAX_TERM];
-    int pl1,pl2,res;
+    int pl1, pl2, res;
 
     printf("Enter the first polynomial:\n");
     inputPolynomial(poly1, &pl1);
@@ -95,8 +96,5 @@ int main()
     printf("The resulting polynomial after addition: ");
     displayPolynomial(result, res);
 
-
-    
     return 0;
-
 }
