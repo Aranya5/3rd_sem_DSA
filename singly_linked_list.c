@@ -5,17 +5,17 @@
 typedef struct node
 {
     int data;
-    struct node * link;
+    struct node *link;
 } node;
 
 node *insert_at_beginning(node *head, int val)
 {
-    node *new = (node*)malloc(sizeof(node));
-    if(new != NULL)
+    node *new = (node *)malloc(sizeof(node));
+    if (new != NULL)
     {
         new->data = val;
         new->link = NULL;
-        if(head == NULL)
+        if (head == NULL)
         {
             head = new;
         }
@@ -34,19 +34,19 @@ node *insert_at_beginning(node *head, int val)
 
 node *inser_at_end(node *head, int val)
 {
-    node *new = (node*)malloc(sizeof(node));
-    if(new != NULL)
+    node *new = (node *)malloc(sizeof(node));
+    if (new != NULL)
     {
         new->data = val;
         new->link = NULL;
-        if(head == NULL)
+        if (head == NULL)
         {
-            head=new;
+            head = new;
         }
         else
         {
             node *cur = head;
-            while(cur->link != NULL)
+            while (cur->link != NULL)
             {
                 cur = cur->link;
             }
@@ -65,17 +65,17 @@ node *insert_at_position(node *head, int val, int pos)
 {
     node *cur = head;
     int count = 0;
-    if(pos == 1)
+    if (pos == 1)
     {
-        head = insert_at_beginning(head,val);
+        head = insert_at_beginning(head, val);
     }
-    while(cur != NULL)
+    while (cur != NULL)
     {
         count++;
-        if(pos == count+1)
+        if (pos == count + 1)
         {
-            node *new = (node*)malloc(sizeof(node));
-            if(new != NULL)
+            node *new = (node *)malloc(sizeof(node));
+            if (new != NULL)
             {
                 new->data = val;
                 new->link = cur->link;
@@ -83,13 +83,13 @@ node *insert_at_position(node *head, int val, int pos)
             }
             else
             {
-                 printf("MEMORY ALLOCATION FAILED");
-                 exit(0);                     
+                printf("MEMORY ALLOCATION FAILED");
+                exit(0);
             }
         }
         cur = cur->link;
     }
-    if(pos <= 0 || pos > count+1)
+    if (pos <= 0 || pos > count + 1)
     {
         printf("Invalid Position");
     }
@@ -100,7 +100,7 @@ int delete_at_beginning(node **hptr)
 {
     int val;
     node *head = *hptr;
-    if(head == NULL)
+    if (head == NULL)
     {
         printf("Empty list nothing to delete");
         return INT_MIN;
@@ -120,20 +120,20 @@ int delete_at_end(node **hptr)
 {
     int val;
     node *cur = *hptr, *prev = NULL;
-    if(cur == NULL)
+    if (cur == NULL)
     {
         printf("Empty list nothing to delete");
         return INT_MIN;
     }
     else
     {
-        while(cur->link != NULL)
+        while (cur->link != NULL)
         {
             prev = cur;
             cur = cur->link;
         }
 
-        if(prev != NULL)
+        if (prev != NULL)
         {
             prev->link = NULL;
         }
@@ -150,55 +150,55 @@ int delete_at_end(node **hptr)
 
 int delete_at_position(node **hptr, int pos)
 {
-    int count=0,val;
+    int count = 0, val;
     node *head = *hptr, *cur = head, *prev = NULL;
-    if(cur == NULL)
+    if (cur == NULL)
     {
         printf("Empty list nothing to delete");
         return INT_MIN;
     }
-    if(pos == 1)
+    if (pos == 1)
     {
         val = delete_at_beginning(&head);
         *hptr = head;
-        return val; 
+        return val;
     }
-    while(cur != NULL)
+    while (cur != NULL)
     {
         count++;
-        if(pos == count)
+        if (pos == count)
         {
-            if(prev != NULL)
+            if (prev != NULL)
             {
                 prev->link = cur->link;
             }
             val = cur->data;
             free(cur);
-            return val;           
+            return val;
         }
         prev = cur;
         cur = cur->link;
     }
-    if(pos >= count || pos <= 0)
+    if (pos >= count || pos <= 0)
     {
         printf("Invalid Position");
         return INT_MIN;
     }
-return val;
+    return val;
 }
 
-int delete_by_value(node **hptr,int key)
+int delete_by_value(node **hptr, int key)
 {
     node *head = *hptr, *cur = head, *prev = NULL;
-    int flag = 0,val;
-    if(cur == NULL)
+    int flag = 0, val;
+    if (cur == NULL)
     {
-         printf("Empty list");
-         return INT_MIN;
+        printf("Empty list");
+        return INT_MIN;
     }
-    while(cur!=NULL)
+    while (cur != NULL)
     {
-        if(cur->data == key)
+        if (cur->data == key)
         {
             flag = 1;
             break;
@@ -206,12 +206,12 @@ int delete_by_value(node **hptr,int key)
         prev = cur;
         cur = cur->link;
     }
-    if(flag == 0)
+    if (flag == 0)
     {
         printf("Element not found");
         return INT_MIN;
     }
-    if(prev == NULL)
+    if (prev == NULL)
     {
         val = delete_at_beginning(&hptr);
     }
@@ -226,14 +226,14 @@ int delete_by_value(node **hptr,int key)
 
 node *reverse_linked_list(node *head)
 {
-    node *cur = head,*prev = NULL,*next;
-    if(head == NULL)
+    node *cur = head, *prev = NULL, *next;
+    if (head == NULL)
     {
         printf("Empty List");
         return head;
     }
     next = cur->link;
-    while(next != NULL)
+    while (next != NULL)
     {
         cur->link = prev;
         prev = cur;
@@ -248,7 +248,7 @@ node *reverse_linked_list(node *head)
 void display(node *head)
 {
     node *temp = head;
-    while(temp != NULL)
+    while (temp != NULL)
     {
         printf("%d -> ", temp->data);
         temp = temp->link;
@@ -257,24 +257,24 @@ void display(node *head)
 }
 int main()
 {
-    int v,r;
+    int v, r;
     node *head = NULL;
-   head = inser_at_end(head, 20);
-   head =  inser_at_end(head, 30);
-    head =   inser_at_end(head, 40);
-    head =  insert_at_beginning(head,90);
-   head = insert_at_position(head, 70 , 2);
+    head = inser_at_end(head, 20);
+    head = inser_at_end(head, 30);
+    head = inser_at_end(head, 40);
+    head = insert_at_beginning(head, 90);
+    head = insert_at_position(head, 70, 2);
     display(head);
     printf("\n");
-    v=delete_by_value(&head,40);
-   display(head);
+    v = delete_by_value(&head, 40);
+    display(head);
     printf("\n");
-    r=delete_at_position(&head,1);
+    r = delete_at_position(&head, 1);
     display(head);
     printf("\n");
 
     head = reverse_linked_list(head);
     printf("\n");
-     display(head);
+    display(head);
     return 0;
 }
